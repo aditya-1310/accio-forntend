@@ -38,16 +38,15 @@ export default function AuthForm({ apiBase, onAuth }) {
           ? data.data
           : data.data?.token || data.data?.jwt || data.token;
 
-      // If sign-up didn’t return a token, perform a sign-in automatically
-      if (!token && mode === "signup") {
-        const loginRes = await fetch(`${apiBase}/user/signIn`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: form.email, password: form.password }),
-        });
-        const loginData = await loginRes.json();
-        token = loginData.data || loginData.token;
+      // If we just signed up, switch to login mode and ask user to log in
+      if (mode === "signup") {
+        setMode("login");
+        setErr("Account created. Please log in.");
+        return;
       }
+
+      // For login mode, ensure we have a token
+
 
       if (token) {
         localStorage.setItem("token", token);
