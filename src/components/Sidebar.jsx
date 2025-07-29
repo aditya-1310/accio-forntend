@@ -7,7 +7,7 @@ const LogoutIcon = () => (
     </svg>
 );
 
-const Sidebar = ({ onNewChat, onSelectSession }) => {
+const Sidebar = ({ onNewChat, onSelectSession, onLogout }) => {
     
 
     const [chatHistory, setChatHistory] = useState([]);
@@ -67,7 +67,7 @@ const Sidebar = ({ onNewChat, onSelectSession }) => {
                 </ul>
             </div>
             <div className="pt-2 border-t border-gray-700">
-                 <button className="w-full text-left p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 flex items-center space-x-2">
+                 <button onClick={onLogout} className="w-full text-left p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 flex items-center space-x-2">
                     <LogoutIcon />
                     <span>Logout</span>
                  </button>

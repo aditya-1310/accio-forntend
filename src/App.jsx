@@ -5,7 +5,7 @@ import OutputView from './components/OutputView';
 import InputArea from './components/InputArea';
 
 
-export default function App() {
+export default function App({ onLogout }) {
   const baseUrl = import.meta.env.VITE_BASE_URL;
   // Placeholder state for the generated code.
     const [sessionId, setSessionId] = useState(null);
@@ -15,7 +15,7 @@ export default function App() {
     const [generatedCode, setGeneratedCode] = useState({
         jsx: `import React from "react";
 
-export default function App() {
+export default function App({ onLogout }) {
   return (
     <div className="p-8 text-center">
       <h1 className="text-2xl font-bold mb-4">Welcome to AI Component Generator</h1>
@@ -112,7 +112,7 @@ export default function App() {
 
     return (
         <div className="flex h-screen bg-gray-800 text-white font-sans">
-            <Sidebar onNewChat={handleNewChat} onSelectSession={handleSelectSession} />
+            <Sidebar onNewChat={handleNewChat} onSelectSession={handleSelectSession} onLogout={onLogout} />
             <main className="flex-1 flex flex-col">
                 <ChatView messages={messages} />
                 <OutputView generatedCode={generatedCode} />
