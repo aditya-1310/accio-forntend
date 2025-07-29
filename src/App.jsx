@@ -4,8 +4,10 @@ import ChatView from './components/ChatView';
 import OutputView from './components/OutputView';
 import InputArea from './components/InputArea';
 
+
 export default function App() {
-    // Placeholder state for the generated code.
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  // Placeholder state for the generated code.
     const [sessionId, setSessionId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [components, setComponents] = useState([]);
@@ -24,7 +26,7 @@ export default function App() {
         css: ""
     });
 
-    const API_BASE_URL = "http://localhost:3000/api"; // adjust if needed
+    const API_BASE_URL = baseUrl+"/api"; // adjust if needed
     const handleNewChat = () => {
         console.log("Starting a new chat session...");
         // Here we would clear the state or create a new session via API
