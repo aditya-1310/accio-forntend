@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+
+
 /* AuthForm handles both Sign-Up and Sign-In flows */
 export default function AuthForm({ apiBase, onAuth }) {
+  
+  const baseUrl = import.meta.env.VITE_BASE_URL || "http://localhost:3000/api";
+
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [err, setErr] = useState("");
@@ -21,7 +26,7 @@ export default function AuthForm({ apiBase, onAuth }) {
     e.preventDefault();
     setErr("");
     try {
-      const endpoint = `${apiBase}/user/${mode === "login" ? "signIn" : "signUp"}`;
+      const endpoint = `${baseUrl}/user/${mode === "login" ? "signIn" : "signUp"}`;
       const body =
         mode === "login"
           ? { email: form.email, password: form.password }

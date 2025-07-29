@@ -7,15 +7,16 @@ const LogoutIcon = () => (
     </svg>
 );
 
-const Sidebar = ({ onNewChat, onSelectSession, onLogout }) => {
+const Sidebar = ({ onNewChat, onSelectSession, onLogout, apiBase }) => {
     
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     const [chatHistory, setChatHistory] = useState([]);
 
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/session/allSession', {
+        const response = await fetch(`${baseUrl}/session/allSession`, {
         //   credentials: 'include', // if cookies/session are used
         });
         const result = await response.json();

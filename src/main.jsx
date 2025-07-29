@@ -4,14 +4,16 @@ import './index.css';
 import App from './App.jsx';
 import AuthForm from './components/AuthForm.jsx';
 
-// Prefer env var but fall back to localhost for dev
-const API_BASE = (import.meta.env.VITE_BASE_URL
-  ? `${import.meta.env.VITE_BASE_URL}/api`
-  : 'http://localhost:3000/api');
+
 
 function Root() {
   const [token, setToken] = useState(localStorage.getItem('token'));
+// Prefer env var but fall back to localhost for dev
+const API_BASE = (import.meta.env.VITE_BASE_URL
+  ? `${import.meta.env.VITE_BASE_URL}`
+  : 'http://localhost:3000/api');
 
+  console.log(API_BASE);  
   const handleAuth = (jwt) => {
     if (jwt) {
       localStorage.setItem('token', jwt);
@@ -28,7 +30,7 @@ function Root() {
     return <AuthForm apiBase={API_BASE} onAuth={handleAuth} />;
   }
 
-  return <App onLogout={handleLogout} />;
+  return <App apiBase={API_BASE} onLogout={handleLogout} />;
 }
 
 createRoot(document.getElementById('root')).render(<Root />);
